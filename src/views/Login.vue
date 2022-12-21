@@ -37,22 +37,34 @@
                             <div class="text-center text-muted mb-4">
                                 <small>Or sign in with credentials</small>
                             </div>
-                            <form role="form">
+                            <form class="form" @submit.prevent="login(user)" >
                                 <base-input alternative
                                             class="mb-3"
                                             placeholder="Email"
-                                            addon-left-icon="ni ni-email-83">
+                                            addon-left-icon="ni ni-email-83"
+                                            v-model="user.email"
+                                            type="email"
+                                            id="email"
+                                            required
+                                            >
                                 </base-input>
                                 <base-input alternative
                                             type="password"
                                             placeholder="Password"
-                                            addon-left-icon="ni ni-lock-circle-open">
+                                            addon-left-icon="ni ni-lock-circle-open"
+                                            v-model="user.password"
+                                            id="password"
+                                            required>
                                 </base-input>
                                 <base-checkbox>
                                     Remember me
                                 </base-checkbox>
+                                <p v-if="error" class="error">Has introducido mal el email o la contraseña.</p>
                                 <div class="text-center">
-                                    <base-button type="primary" class="my-4">Sign In</base-button>
+                                    <base-button class="my-4"  type="primary" nativeType="submit">Sign In
+                                        <!-- <input class="my-4" type="submit" value="Login"> -->
+                                    </base-button>
+                                    <!-- <base-button  class="my-4"  type="submit" value="login">Sign In</base-button> -->
                                 </div>
                             </form>
                         </template>
@@ -75,7 +87,32 @@
     </section>
 </template>
 <script>
-export default {};
+import { mapActions } from 'vuex'
+
+export default {
+    name: 'login',
+    data() {
+        return {
+           user:  {
+                email: "",
+                password: "",
+                error: false
+           }
+        }
+    },
+  methods: {
+    // login(user) {
+    //     console.log("user", user)
+    //     console.log("mapActions", ...mapActions(['login']))
+    // },
+    ...mapActions(['login']),
+    //  login() {
+        
+    //    console.log(this.email);
+    //    console.log(this.password);
+    //  }
+  }
+};
 </script>
 <style>
 </style>

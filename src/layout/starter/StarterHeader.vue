@@ -59,6 +59,7 @@
                         <router-link to="/profile" class="dropdown-item">Profile</router-link>
                         <router-link to="/login" class="dropdown-item">Login</router-link>
                         <router-link to="/register" class="dropdown-item">Register</router-link>
+                        <router-link to="/logout" class="dropdown-item">Logout</router-link>
                     </div>
                 </li>
             </ul>

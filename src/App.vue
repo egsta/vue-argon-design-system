@@ -11,10 +11,17 @@
 </template>
 <script>
 import { FadeTransition } from "vue2-transitions";
+import { mapActions } from 'vuex';
 
 export default {
   components: {
     FadeTransition
+  },
+  methods: {
+    ...mapActions(['getToken'])
+  },
+  created(){
+    this.getToken()
   }
 };
 </script>

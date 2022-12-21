@@ -69,7 +69,12 @@
     </div>
 </template>
 <script>
-export default {};
+import {mapState} from 'vuex'
+export default {
+  computed: {
+    ...mapState(['token'])
+  }
+}
 </script>
 <style>
 </style>
