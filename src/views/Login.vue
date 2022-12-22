@@ -59,7 +59,10 @@
                                 <base-checkbox>
                                     Remember me
                                 </base-checkbox>
-                                <p v-if="error" class="error">Has introducido mal el email o la contraseña.</p>
+                                <p v-if='error()' class="error" >{{error()}}</p>
+                                <!-- <div>
+                                    Error message: {{ error() }}
+                                </div> -->
                                 <div class="text-center">
                                     <base-button class="my-4"  type="primary" nativeType="submit">Sign In
                                         <!-- <input class="my-4" type="submit" value="Login"> -->
@@ -87,7 +90,7 @@
     </section>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'login',
@@ -96,22 +99,21 @@ export default {
            user:  {
                 email: "",
                 password: "",
-                error: false
-           }
+               
+           },
+        
         }
     },
   methods: {
-    // login(user) {
-    //     console.log("user", user)
-    //     console.log("mapActions", ...mapActions(['login']))
-    // },
-    ...mapActions(['login']),
-    //  login() {
-        
-    //    console.log(this.email);
-    //    console.log(this.password);
-    //  }
-  }
+    ...mapActions(['login','getError', 'setError']),
+  },
+  created: function() {
+    this.setError("")
+  },
+     computed: {
+       ...mapGetters(['error'])
+   }
+  
 };
 </script>
 <style>

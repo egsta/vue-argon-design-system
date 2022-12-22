@@ -104,13 +104,13 @@ export default router
 
 // Verificando si hay token en el estado
 // Este método realiza una logica al cambiar de rutas
-router.beforeEach((to, from, next)=>{
-  // Usamos to para verificar si requiera autenticación
-  const protectedRoute = to.matched.some(record => record.meta.requireAuth)
-  // Procedemos a verificar el token
-  if (protectedRoute && store.state.token === null) {
-    next({name: '#'})
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next)=>{
+//   // Usamos to para verificar si requiera autenticación
+//   const protectedRoute = to.matched.some(record => record.meta.requireAuth)
+//   // Procedemos a verificar el token
+//   if (protectedRoute && store.state.token === null) {
+//     next({name: '#'})
+//   } else {
+//     next()
+//   }
+// })

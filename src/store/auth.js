@@ -9,12 +9,22 @@ import axios from 'axios'
 
 export default new Vuex.Store({
   state: {
-    token: null
+    token: null,
+    error: null,
   },
   mutations: {
     setToken(state, payload){
       state.token = payload
-    }
+    },
+    setError(state, payload){
+        console.log("Error setError", payload)
+        state.error = payload
+      }
+  },
+  getters: {
+    error: (state, getters) => () =>  {
+        return state.error
+      },
   },
   actions: {
     async login({ commit }, user) {
@@ -46,7 +56,8 @@ export default new Vuex.Store({
             router.push('/profile');
         }
       } catch (error) {
-        console.log('Error: ', error)
+            console.log('Error: ', error)
+            commit('setError', error.response.data.message)
       }
     },
     getToken({commit}) {
@@ -60,7 +71,22 @@ export default new Vuex.Store({
     logout({commit}) {
             commit('setToken', null)
             localStorage.removeItem('token')
+     },
+     getError({commit}) {
+        if(state.error){
+            console.log("Error true", state.error)
+            return true
+        }else{
+            console.log("Error false", state.error)
+            return false
+        }
+        
+     },
+     setError({commit}, payload) {
+        console.log("setError created")
+        commit('setError', payload)
      }
+
   },
   modules: {
   }
